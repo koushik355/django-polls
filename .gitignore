@@ -1,4 +1,4 @@
 django-intellij
 .idea
-env
+.env
 mysite/db.sqlite3
