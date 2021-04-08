@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Detail</title>
+</head>
+<body>
+<h1>
+    {{ question.question_text }}
+</h1>
+{% if error_msg %}
+    <p><strong>{{ error_msg }}</strong></p>
+{% endif %}
+<form action="{% url 'polls:vote' question.id %}" method="post">
+    {% csrf_token %}
+    {% for choice in question.choice_set.all %}
+        <input type="radio" name="choice" value="{{ choice.id }}" id="choice{{ forloop.counter }}">
+        <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label> <br>
+    {% endfor %}
+    {% if question.choice_set.count %}
+        <button type="submit">Submit</button>
+    {% endif %}
+</form>
+</body>
+</html>

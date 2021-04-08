@@ -1,0 +1,4 @@
+django-intellij
+.idea
+env
+mysite/db.sqlite3
