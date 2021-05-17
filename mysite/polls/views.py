@@ -14,7 +14,8 @@ class IndexView(generic.ListView):
     def get_queryset(self):
         """Return the last five published questions."""
         return Question.objects.filter(
-            pub_date__lte=timezone.now()
+            pub_date__lte=timezone.now(),
+            choice__id__isnull=False
         ).order_by('-pub_date')[:5]
 
 
@@ -42,3 +43,10 @@ def vote(request, question_id):
         choice.vote += 1
         choice.save()
         return HttpResponseRedirect(reverse('polls:result', args=(question.id,)))
+
+
+def testing(request):
+    text = f"""
+            questions: {Question.objects.all()}
+        """
+    return HttpResponse(text, content_type='text/plain')

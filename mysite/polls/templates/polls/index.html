@@ -1,11 +1,16 @@
+{% extends "base.html" %}
 {% load static %}
-<link rel="stylesheet" href="{% static 'polls/style.css' %}">
-{% if latest_question_list %}
-    <ul>
-        {% for question in latest_question_list %}
-            <li><a href="/polls/{{ question.id }}/">{{ question.question_text }}</a></li>
-        {% endfor %}
-    </ul>
-{% else %}
-    <p>No polls are available.</p>
-{% endif %}
+{% block stylesheet %}
+    <link rel="stylesheet" href="{% static 'polls/index.css' %}">
+{% endblock %}
+{% block content %}
+    {% if latest_question_list %}
+        <ol class="question-list">
+            {% for question in latest_question_list %}
+                <li><a href="/polls/{{ question.id }}/">{{ question.question_text }}</a></li>
+            {% endfor %}
+        </ol>
+    {% else %}
+        <p>No polls are available.</p>
+    {% endif %}
+{% endblock %}
